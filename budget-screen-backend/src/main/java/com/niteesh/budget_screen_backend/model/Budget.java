@@ -1,6 +1,6 @@
 package com.niteesh.budget_screen_backend.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class Budget {
     private Double totalAmount;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Expense> expenses;
 
     // Getters and Setters
@@ -26,20 +27,20 @@ public class Budget {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Double getTotalAmount() {
         return totalAmount;
     }
 
     public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Expense> getExpenses() {
@@ -50,3 +51,4 @@ public class Budget {
         this.expenses = expenses;
     }
 }
+

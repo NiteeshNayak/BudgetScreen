@@ -1,21 +1,23 @@
 package com.niteesh.budget_screen_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-public class Expense {
+public class ExpenseHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
     private Double amount;
+    private String action; // e.g., "CREATED", "UPDATED", "DELETED"
+
+    private LocalDateTime timestamp;
 
     @ManyToOne
-    @JoinColumn(name = "budget_id", nullable = false)
-    @JsonIgnore
-    private Budget budget;
+    @JoinColumn(name = "expense_id", nullable = false)
+    private Expense expense;
 
     // Getters and Setters
 
@@ -43,12 +45,28 @@ public class Expense {
         this.amount = amount;
     }
 
-    public Budget getBudget() {
-        return budget;
+    public String getAction() {
+        return action;
     }
 
-    public void setBudget(Budget budget) {
-        this.budget = budget;
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Expense getExpense() {
+        return expense;
+    }
+
+    public void setExpense(Expense expense) {
+        this.expense = expense;
     }
 }
 

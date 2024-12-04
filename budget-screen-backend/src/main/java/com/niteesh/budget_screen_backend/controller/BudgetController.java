@@ -1,6 +1,5 @@
 package com.niteesh.budget_screen_backend.controller;
 
-
 import com.niteesh.budget_screen_backend.model.Budget;
 import com.niteesh.budget_screen_backend.service.BudgetService;
 import org.springframework.web.bind.annotation.*;
@@ -32,3 +31,4 @@ public class BudgetController {
         return budgetService.getAllBudgets();
     }
 }
+

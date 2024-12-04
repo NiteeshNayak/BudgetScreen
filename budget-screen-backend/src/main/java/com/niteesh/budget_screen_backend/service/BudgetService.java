@@ -1,6 +1,5 @@
 package com.niteesh.budget_screen_backend.service;
 
-
 import com.niteesh.budget_screen_backend.model.Budget;
 import com.niteesh.budget_screen_backend.repository.BudgetRepository;
 import org.springframework.stereotype.Service;
