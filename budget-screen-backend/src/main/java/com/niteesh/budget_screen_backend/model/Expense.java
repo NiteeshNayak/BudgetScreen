@@ -1,7 +1,8 @@
 package com.niteesh.budget_screen_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Expense {
@@ -10,15 +11,22 @@ public class Expense {
     private Long id;
 
     private String description;
+
     private Double amount;
+
+    private LocalDateTime timestamp;
 
     @ManyToOne
     @JoinColumn(name = "budget_id", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
     private Budget budget;
 
-    // Getters and Setters
+    @PrePersist
+    protected void onCreate() {
+        this.timestamp = LocalDateTime.now();
+    }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -43,6 +51,14 @@ public class Expense {
         this.amount = amount;
     }
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public Budget getBudget() {
         return budget;
     }
@@ -51,4 +67,5 @@ public class Expense {
         this.budget = budget;
     }
 }
+
 

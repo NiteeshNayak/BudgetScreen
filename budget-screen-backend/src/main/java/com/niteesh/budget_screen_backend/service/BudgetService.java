@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class BudgetService {
-
     private final BudgetRepository budgetRepository;
 
     public BudgetService(BudgetRepository budgetRepository) {
@@ -19,15 +18,23 @@ public class BudgetService {
         return budgetRepository.save(budget);
     }
 
-    public Budget updateBudget(Long id, Budget updatedBudget) {
-        Budget budget = budgetRepository.findById(id).orElseThrow(() -> new RuntimeException("Budget not found"));
-        budget.setName(updatedBudget.getName());
-        budget.setTotalAmount(updatedBudget.getTotalAmount());
-        return budgetRepository.save(budget);
-    }
-
     public List<Budget> getAllBudgets() {
         return budgetRepository.findAll();
     }
+
+    public Budget getBudgetById(Long id) {
+        return budgetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Budget not found"));
+    }
+
+    public Budget updateBudget(Long id, Budget updatedBudget) {
+        Budget existingBudget = budgetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Budget not found"));
+        existingBudget.setName(updatedBudget.getName());
+        existingBudget.setTotalAmount(updatedBudget.getTotalAmount());
+        return budgetRepository.save(existingBudget);
+    }
 }
+
+
 

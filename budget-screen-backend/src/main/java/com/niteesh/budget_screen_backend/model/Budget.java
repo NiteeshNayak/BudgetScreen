@@ -11,28 +11,22 @@ public class Budget {
     private Long id;
 
     private String name;
-    private Double totalAmount;
+
+    private Double totalAmount; // Original budget amount
+
+    private Double currentExpenses = 0.0; // Track the total expenses
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Expense> expenses;
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
     }
 
     public String getName() {
@@ -43,6 +37,22 @@ public class Budget {
         this.name = name;
     }
 
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Double getCurrentExpenses() {
+        return currentExpenses;
+    }
+
+    public void setCurrentExpenses(Double currentExpenses) {
+        this.currentExpenses = currentExpenses;
+    }
+
     public List<Expense> getExpenses() {
         return expenses;
     }
@@ -51,4 +61,5 @@ public class Budget {
         this.expenses = expenses;
     }
 }
+
 
